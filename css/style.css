@@ -20,12 +20,13 @@ body {
   line-height: 1.4;
 }
 
+/* PADRÃO DESKTOP / IMPRESSÃO */
 .page {
-  max-width: 210mm;
+  max-width: 210mm; /* Mantém o tamanho da folha A4 no PC */
   margin: 0 auto;
   background: white;
   min-height: 297mm;
-  padding: 12mm 14mm 10mm;
+  padding: 15px;
 }
 
 /* HEADER */
@@ -242,12 +243,13 @@ body {
   display: flex;
   gap: 8px;
   margin-bottom: 10px;
+  /* flex-direction: row; (padrão) */
 }
 
 .total-card {
   border: 1.5px solid var(--line);
   flex: 1;
-  color: white;
+  color: white; /* Cuidado aqui: texto branco em fundo branco não aparece na impressão. Ajuste se necessário! */
   border-radius: 6px;
   padding: 6px 12px;
   display: flex;
@@ -260,7 +262,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--soft);
+  color: var(--soft); /* Corrigido de #AAAAAA para o padrão */
 }
 
 .total-card .line-input-white {
@@ -296,7 +298,7 @@ body {
 /* CONFERÊNCIAS */
 .conf-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* No PC, 2 colunas */
   gap: 6px;
   margin-bottom: 10px;
 }
@@ -319,6 +321,7 @@ body {
   display: flex;
   gap: 16px;
   margin-top: 10px;
+  /* flex-direction: row; (padrão) */
 }
 
 .sign-field { flex: 1; }
@@ -362,7 +365,67 @@ body {
   letter-spacing: 0.3px;
 }
 
-/* PRINT A4 CONFIGURATION */
+
+/* ======================================================= */
+/* EXCLUSIVO PARA CELULARES (SÓ ATIVA EM TELAS PEQUENAS)   */
+/* ======================================================= */
+@media screen and (max-width: 800px) {
+  .page {
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .header-meta { text-align: left; }
+  
+  .row {
+    flex-direction: column; 
+    gap: 12px;
+  }
+  
+  .prog-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .prog-table th, .prog-table td {
+    white-space: nowrap;
+  }
+  
+  .presence-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .totais-row {
+    flex-direction: column;
+  }
+  
+  .conf-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sign-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+/* ======================================================= */
+/* CONFIGURAÇÕES DE IMPRESSÃO (Folha A4 exata)             */
+/* ======================================================= */
 @media print {
   html, body {
     width: 210mm;
